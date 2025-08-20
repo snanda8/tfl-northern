@@ -179,3 +179,12 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+
+# --- Project-specific ignores ---
+raw_data/
+*.csv
+*.xlsx
+.ipynb_checkpoints/
+outputs/*.csv
+outputs/*.xlsx
