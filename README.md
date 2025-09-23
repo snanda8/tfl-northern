@@ -87,4 +87,4 @@ The aim is to analyse **delay** on the tube and compare it with other key lines 
 
 ## 👤 Author
 
-Built by *[Sarthak Nanda]* as part of a personal data analysis portfolio project.
+Built by **Sarthak Nanda** as part of a personal data analysis portfolio project.
