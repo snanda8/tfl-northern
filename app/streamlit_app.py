@@ -87,11 +87,51 @@ def plot_lost_hours_line_chart(df):
     st.pyplot(fig)
 
 
+
+def plot_annual_grouped_bar(df):
+    import matplotlib.pyplot as plt
+
+    # Group and sum data by year
+    annual_df = (
+        df.groupby("Financial Year")[["Northern", "Central", "Jubilee", "Victoria"]]
+        .sum()
+        .reset_index()
+    )
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(10, 6))
+    width = 0.2
+    x = np.arange(len(annual_df["Financial Year"]))
+
+    lines = ["Northern", "Central", "Jubilee", "Victoria"]
+    colors = {
+        "Northern": "#000000",  # black
+        "Central": "#DC241F",   # red
+        "Jubilee": "#868F98",   # silver
+        "Victoria": "#00A0E2",  # blue
+    }
+
+    for i, line in enumerate(lines):
+        ax.bar(x + i * width, annual_df[line], width, label=line, color=colors[line])
+
+    ax.set_xticks(x + width * (len(lines) - 1) / 2)
+    ax.set_xticklabels(annual_df["Financial Year"], rotation=45)
+    ax.set_title("Lost Customer Hours per Year — Grouped by Line")
+    ax.set_xlabel("Financial Year")
+    ax.set_ylabel("Lost Customer Hours (M)")
+    ax.legend(title="Line")
+
+    return fig
+
+
 # --------- MAIN ---------
 def main():
     st.title("🚇 TfL Lost Customer Hours Analysis")
     df = load_data()
     plot_lost_hours_line_chart(df)
+
+    with st.expander("📊 Annual Lost Hours — Grouped Bar Chart"):
+        st.pyplot(plot_annual_grouped_bar(df))
 
 
 if __name__ == "__main__":
